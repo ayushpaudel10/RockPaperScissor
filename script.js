@@ -1,8 +1,10 @@
-const score= {
-    win: 0,
-    lose: 0,
-    draw: 0
-};
+ const score= JSON.parse(localStorage.getItem('score'));
+
+ //{
+//     win: 0,
+//     lose: 0,
+//     draw: 0
+// };
 
 function userPick(yourPick){
     let computerPick=computerMove();
@@ -68,6 +70,8 @@ function userPick(yourPick){
         score.draw++
     }
 
+    localStorage.setItem('score',JSON.stringify(score));
+
     if(yourPick!=='reset'){
         alert(`You picked ${yourPick}. Computer picked ${computerPick}. ${result} \nWins: ${score.win}, Losses: ${score.lose}, Ties: ${score.draw}.`);
     }
@@ -78,10 +82,10 @@ function computerMove(){
     if(choices>=0 && choices<(1/3)){
         return 'rock';
     }
-    if(choices>=(1/3) && choices<(2/3)){
+    else if(choices>=(1/3) && choices<(2/3)){
         return 'paper';
     }
-    if(choices>=(2/3) && choices<1){
+    else if(choices>=(2/3) && choices<1){
         return 'scissor';
     }
 }
