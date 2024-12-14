@@ -1,3 +1,9 @@
+const score= {
+    win: 0,
+    lose: 0,
+    draw: 0
+};
+
 function userPick(yourPick){
     let computerPick=computerMove();
 
@@ -8,44 +14,63 @@ function userPick(yourPick){
             result=`It's a tie!`;
         }
 
-        if (computerPick==='paper'){
+        else if (computerPick==='paper'){
             result=`You lose!`;
         }
 
-        if (computerPick==='scissors'){
+        else if (computerPick==='scissor'){
             result=`You win!`;
         }
     }
 
-    if (yourPick==='paper'){
+    else if (yourPick==='paper'){
         if (computerPick==='rock'){
             result=`You win!`;
         }
 
-        if (computerPick==='paper'){
+        else if (computerPick==='paper'){
             result=`It's a tie!`;
         }
 
-        if (computerPick==='scissor'){
+        else if (computerPick==='scissor'){
             result=`You lose!`;
         }
     }
 
-    if (yourPick==='scissor'){
+    else if (yourPick==='scissor'){
         if (computerPick==='rock'){
             result=`You lose!`;
         }
 
-        if (computerPick==='paper'){
+        else if (computerPick==='paper'){
             result=`You win!`;
         }
 
-        if (computerPick==='scissors'){
+        else if (computerPick==='scissor'){
             result=`It's a tie!`;
         }
     }
 
-    alert(`You picked ${yourPick}. Computer picked ${computerPick}. ${result}`)
+    else if(yourPick==='reset'){
+        score.win=0;
+        score.lose=0;
+        score.draw=0;
+        alert(`Score reset! \nWins: ${score.win}, Losses: ${score.lose}, Ties: ${score.draw}.`);
+    }
+ 
+    if (result==='You win!'){
+        score.win++
+    }
+    else if (result==='You lose!'){
+        score.lose++
+    }
+    else if (result===`It's a tie!`){
+        score.draw++
+    }
+
+    if(yourPick!=='reset'){
+        alert(`You picked ${yourPick}. Computer picked ${computerPick}. ${result} \nWins: ${score.win}, Losses: ${score.lose}, Ties: ${score.draw}.`);
+    }
 }
 
 function computerMove(){
