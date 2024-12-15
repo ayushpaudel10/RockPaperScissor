@@ -1,10 +1,15 @@
- const score= JSON.parse(localStorage.getItem('score'));
+const score = JSON.parse(localStorage.getItem('score')) || { win: 0, lose: 0, draw: 0 };
+
 
  //{
 //     win: 0,
 //     lose: 0,
 //     draw: 0
 // };
+
+// document.querySelector('.js-score').innerText = `Wins: ${score.win}, Losses: ${score.lose}, Ties: ${score.draw}.`;
+
+
 
 function userPick(yourPick){
     let computerPick=computerMove();
@@ -57,7 +62,10 @@ function userPick(yourPick){
         score.win=0;
         score.lose=0;
         score.draw=0;
-        alert(`Score reset! \nWins: ${score.win}, Losses: ${score.lose}, Ties: ${score.draw}.`);
+        document.querySelector('.humanPick').innerHTML='';
+        document.querySelector('.computerPick').innerHTML='';
+        document.querySelector('.reset').innerText='Score Reset!';
+        // alert(`Score reset! \nWins: ${score.win}, Losses: ${score.lose}, Ties: ${score.draw}.`);
     }
  
     if (result==='You win!'){
@@ -72,9 +80,25 @@ function userPick(yourPick){
 
     localStorage.setItem('score',JSON.stringify(score));
 
+    document.querySelector('.result').innerText = result;
+
     if(yourPick!=='reset'){
-        alert(`You picked ${yourPick}. Computer picked ${computerPick}. ${result} \nWins: ${score.win}, Losses: ${score.lose}, Ties: ${score.draw}.`);
+        document.querySelector('.humanPick').innerText = `You Picked: ${yourPick}.`;
+
+        document.querySelector('.computerPick').innerText = `Computer Picked: ${computerPick}.`;
+
+        document.querySelector('.reset').innerText='';
+        
     }
+
+
+    document.querySelector('.js-score').innerText = `Wins: ${score.win}, Losses: ${score.lose}, Ties: ${score.draw}.`;
+
+
+
+    // if(yourPick!=='reset'){
+    //     alert(`You picked ${yourPick}. Computer picked ${computerPick}. ${result} \nWins: ${score.win}, Losses: ${score.lose}, Ties: ${score.draw}.`);
+    // }
 }
 
 function computerMove(){
